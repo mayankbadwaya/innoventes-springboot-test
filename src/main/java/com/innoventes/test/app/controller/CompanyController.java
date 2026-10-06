@@ -105,6 +105,10 @@ public class CompanyController {
 		return ResponseEntity.ok(companyService.updatePartial(id,dto));
 	}
 
+<<<<<<< Updated upstream
+=======
+	// I have written a lot of code
+>>>>>>> Stashed changes
 
 
 }

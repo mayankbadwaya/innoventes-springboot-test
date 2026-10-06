@@ -29,6 +29,8 @@ public class ApplicationController {
 	private String getLocalizedMessage(String messageCode) {
 		return messageSource.getMessage(messageCode, null, LocaleContextHolder.getLocale());
 
-		//i am writing something 
+		//i am writing something
+
+		// things are good 
 	}
 }

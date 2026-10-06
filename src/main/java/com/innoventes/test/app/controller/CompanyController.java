@@ -11,14 +11,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.innoventes.test.app.dto.CompanyDTO;
@@ -86,5 +79,32 @@ public class CompanyController {
 	public String getMessage(String exceptionCode) {
 		return messageSource.getMessage(exceptionCode, null, LocaleContextHolder.getLocale());
 	}
+
+	@PostMapping("/company")
+
+	public ResponseEntity<?>
+	createCompany(@Valid @RequestBody CompanyDTO dto )
+	{
+		return  ResponseEntity.ok("Company created");
+	}
+
+	@GetMapping("/company/{id}")
+	public ResponseEntity<CompanyDTO>
+     getById(@PathVariable Long id)
+	{
+		CompanyDTO dto=companyService.getById(id);
+		return ResponseEntity.ok(dto);
+	}
+
+	@PatchMapping("/company/{id}")
+	public ResponseEntity<CompanyDTO>
+	updatePartial(
+			@PathVariable Long id,
+			@RequestBody CompanyDTO dto)
+	{
+		return ResponseEntity.ok(companyService.updatePartial(id,dto));
+	}
+
+
 
 }

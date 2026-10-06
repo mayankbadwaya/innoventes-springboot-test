@@ -3,6 +3,7 @@ package com.innoventes.test.app.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.innoventes.test.app.dto.CompanyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,4 +54,37 @@ public class CompanyServiceImpl implements CompanyService {
 						ApplicationErrorCodes.COMPANY_NOT_FOUND));
 		companyRepository.deleteById(existingCompanyRecord.getId());
 	}
+
+
+	public CompanyDTO getById(Long id)
+	{
+		Company company =companyRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Company not found"));
+		return mapToDTO(company);
+
+	}
+
+	public CompanyDTO updatePartial(Long id, CompanyDTO dto)
+	{
+		Company company=companyRepository.findById(id)
+				.orElseThrow(()->new RuntimeException("Company not found"));
+		if(dto.getCompanyName()!=null)
+		{
+			company.setCompanyName(dto.getCompanyName());
+		}
+		if(dto.getEmail()!=null)
+		{
+			company.setEmail(dto.getEmail());
+		}
+		companyRepository.save(company);
+
+		return mapToDTO(company);
+
+	}
+
+	private CompanyDTO mapToDTO(Company company) {
+		return null;
+	}
+
+
 }
